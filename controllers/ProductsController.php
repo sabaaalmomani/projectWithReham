@@ -31,10 +31,6 @@ class ProductsController extends \yii\web\Controller
         $searchModel = new ProductsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         
-
-       
-
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel'  =>$searchModel,
@@ -58,19 +54,15 @@ class ProductsController extends \yii\web\Controller
      {
             
         $model= new Products();
-        //$model->scenario = Products::SCENARIO_CREATE;
+        $model->scenario = Products::SCENARIO_CREATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
-            $productId=$model->id;
             $image=UploadedFile::getInstance($model,'product_image');
-
-             $imgName='pro_' . $productId .'.' . $image->getExtension();
-            //  print_r($imgName);die;
-             $image->saveAs(yii::getAlias('@productsimgpath') . `/` . $imgName);
-             $model->product_image=$imgName;
-             
-             $model->save();
+            $imgName= time() .'.' . $image->getExtension();
+            $image->saveAs(yii::getAlias('@productsimgpath') . `/` . $imgName);
+            $model->product_image=$imgName;
+            $model->save();
 
               //  echo '<pre>';
              //  print_r($image);
@@ -95,7 +87,7 @@ class ProductsController extends \yii\web\Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-       // $model->scenario = Products::SCENARIO_UPDATE;
+        $model->scenario = Products::SCENARIO_UPDATE;
 
          if (!empty(Yii::$app->request->post())) {
 

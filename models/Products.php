@@ -52,7 +52,7 @@ class Products extends \yii\db\ActiveRecord
             'name' => 'Name',
             'description'=>'Description',
             'price'=>'Price',
-            'idate'=>'Idate',
+            'idate'=>'idate',
             'udate'=>'Udate',
             'category_id'=>'Category'
         ];
@@ -69,7 +69,7 @@ class Products extends \yii\db\ActiveRecord
                'timestamp' => [
                    'class' => \yii\behaviors\TimestampBehavior::className(),
                    'attributes' => [
-                       \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['idate', 'idate'],
+                       \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['idate'],
                        \yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => ['udate'],
                    ],
                    'value' => new \yii\db\Expression('NOW()'),
@@ -86,23 +86,17 @@ class Products extends \yii\db\ActiveRecord
            }
 
 
+        }
 
-
-    // public function beforeSave($insert)
-    // {
-    // //   //  echo $this->scenario;die;
-    // // //     $current_time = date('Y-m-d H:i:s');
-    // // //     if ( $this->isNewRecord )
-    // // //     {
-    // // //        $this->idate = $current_time;
-
-    // // //     }else{
-
-    // // //        $this->udate = $current_time;
-    // // //     }
-    // //      return parent::beforeSave($insert);
-    //   }
-    
-    
-
-    }
+   // public function beforeSave($insert)}
+       //{
+      //  echo $this->scenario;die;
+     //     $current_time = date('Y-m-d H:i:s');
+    //     if ( $this->isNewRecord )
+   //     {
+  //        $this->idate = $current_time;
+ //     }else{
+ //        $this->udate = $current_time;
+//     }
+ //      return parent::beforeSave($insert);
+// }

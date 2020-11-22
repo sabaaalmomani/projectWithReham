@@ -22,21 +22,16 @@ class CategoriesController extends \yii\web\Controller
         ];
     }
 
+
     public function actionIndex()
     {
         $query=Categories::find();
 
         $dataProvider = new ActiveDataProvider(
-            ['query' => $query,
+            ['query' => $query,]);
             
-    ]);
-
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-
-        ]);
-
+                  return $this->render('index', [
+                'dataProvider' => $dataProvider ]);
     }
 
 
@@ -56,13 +51,9 @@ class CategoriesController extends \yii\web\Controller
         $model = new Categories();
 
         if ($model->load(Yii::$app->request->post())&&$model->save()) {
-       
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         else {
-
-	
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -77,16 +68,10 @@ class CategoriesController extends \yii\web\Controller
         $model = $this->findModel($id);
 
          if (!empty(Yii::$app->request->post())) {
-
-                $model->load(Yii::$app->request->post());
-
-
-        if ($model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-    }
-
+         $model->load(Yii::$app->request->post());
+         if ($model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);}
+         }
         return $this->render('update', [
             'model' => $model,
 
@@ -94,7 +79,7 @@ class CategoriesController extends \yii\web\Controller
     }
           
 
-
+    
     public function actionDelete($id)
     {
         $model=$this->findModel($id);
@@ -108,7 +93,8 @@ class CategoriesController extends \yii\web\Controller
 
     protected function findModel($id)
     {
-        if (($model = Categories::findOne($id)) !== null) {
+        if (($model = Categories::findOne($id)) !== null)
+         {
             return $model;
         }
 

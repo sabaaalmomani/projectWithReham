@@ -33,13 +33,6 @@ class m201118_194452_fisrt_migration extends Migration
     ]);
 
 
-    $this->insert('user',[
-        'id'=>'2',
-        'name'=>'test2',
-        'satus'=>'1',
-        'create_at'=>time(),
-        'email'=>'test2@example.com'
-    ]);
 
     }
 

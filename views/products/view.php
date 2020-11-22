@@ -23,20 +23,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',	
             'idate',
             'udate',
-            
-            [
-                'label'=>'category',
-                'value'=>($model->category)?$model->category->name:'',
-            ],
             'price',
             [
-                'attribute'=>'product_image',
-                'value'=>yii::getAlias('@productsimgurl'). '/' .$model->product_image,
-
-                'format'=>['image']
+            'label'=>'category',
+            'value'=>($model->category)?$model->category->name:'',
+            ],
+            [
+            'attribute'=>'product_image',
+            'value'=>yii::getAlias('@web/images/products') .'/' . $model->product_image,
+            'format'=>['image']
             ]
            
-        ],
-    ]) ?>
+            ],
+             ]) ?>
 
 </div>
