@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
             'attribute'=>'product_image',
-            'value'=>yii::getAlias('@web/images/products') .'/' . $model->product_image,
+            'value'=>yii::getAlias('@productsimgurl').'/' . $model->product_image,
             'format'=>['image']
             ]
            

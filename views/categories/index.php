@@ -40,7 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
-              
+            
+            'idate',
+            'udate',
              ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

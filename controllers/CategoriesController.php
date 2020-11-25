@@ -4,6 +4,7 @@ use yii\filters\VerbFilter;
 use app\models\Categories;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\data\Pagination;
 
 use Yii;
 use yii\base\Model;

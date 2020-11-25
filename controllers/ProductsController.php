@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\Categories;
 use Yii;
 use yii\filters\VerbFilter;
 use app\models\Products;
@@ -20,12 +21,13 @@ class ProductsController extends \yii\web\Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+                
             ],
         ];
     }
 
 
-
+     
     public function actionIndex()
     {
         $searchModel = new ProductsSearch();
@@ -55,39 +57,29 @@ class ProductsController extends \yii\web\Controller
             
         $model= new Products();
         $model->scenario = Products::SCENARIO_CREATE;
-
+       
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->save();
             $image=UploadedFile::getInstance($model,'product_image');
             $imgName= time() .'.' . $image->getExtension();
-            $image->saveAs(yii::getAlias('@productsimgpath') . `/` . $imgName);
+            $image->saveAs(yii::getAlias( $imgName));
             $model->product_image=$imgName;
             $model->save();
 
-              //  echo '<pre>';
-             //  print_r($image);
-            // $model->save();
-           // die;
-
-        return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        else {
-             //print_r($model->getErrors ());die;
-
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-
-
-    }
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+         else { 
+                    //print_r($model->getErrors ());die;
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+              }
+    } 
 
         
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = Products::SCENARIO_UPDATE;
+       $model->scenario = Products::SCENARIO_UPDATE;
 
          if (!empty(Yii::$app->request->post())) {
 
@@ -99,7 +91,6 @@ class ProductsController extends \yii\web\Controller
             }else {
               //  print_r($model->getErrors());die;
             }
-
     }
 
         return $this->render('update', [

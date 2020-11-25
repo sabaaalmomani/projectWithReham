@@ -18,8 +18,8 @@ class Products extends \yii\db\ActiveRecord
     public function scenarios()
     { 
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_CREATE] =  ['price','name','description','category_id','idate'];
-        $scenarios[self::SCENARIO_UPDATE] = ['price','name','description','category_id','udate'];
+        $scenarios[self::SCENARIO_CREATE] =  ['price','name','description','category_id','idate','product_image'];
+        $scenarios[self::SCENARIO_UPDATE] = ['price','name','description','category_id','udate','product_image'];
         return $scenarios;  
     }
 
@@ -36,8 +36,9 @@ class Products extends \yii\db\ActiveRecord
       //  'message' => 'Price must be between 1-100 JD AND must be number', 'max' => 110, 'min' => 1.00],
         [['price'], 'number','message' => 'Price must be between 1-100 JD AND must be number', 'max' => 110, 'min' => 1.00],
         [['name','description'], 'string'],
-
+        [['product_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
         [['id','category_id'], 'integer'],
+        [['idate', 'udate'], 'date', 'format' => 'php:Y-m-d H:i:s'],
 
     
         
@@ -53,15 +54,12 @@ class Products extends \yii\db\ActiveRecord
             'description'=>'Description',
             'price'=>'Price',
             'idate'=>'idate',
-            'udate'=>'Udate',
-            'category_id'=>'Category'
+            'udate'=>'udate',
+            'category_id'=>'Category',
+            'product_image'=>'product_image',
         ];
     }
     
-
-    
-
-
 
        public function behaviors()
        {
@@ -71,32 +69,21 @@ class Products extends \yii\db\ActiveRecord
                    'attributes' => [
                        \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['idate'],
                        \yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => ['udate'],
-                   ],
+                    ],
                    'value' => new \yii\db\Expression('NOW()'),
                ],
            ];
        }
-
+     
      
        public function getCategory()
        {
 
            return $this->hasOne(Categories::class,['id'=>'category_id']);
 
-           }
+       }
 
 
+
+       
         }
-
-   // public function beforeSave($insert)}
-       //{
-      //  echo $this->scenario;die;
-     //     $current_time = date('Y-m-d H:i:s');
-    //     if ( $this->isNewRecord )
-   //     {
-  //        $this->idate = $current_time;
- //     }else{
- //        $this->udate = $current_time;
-//     }
- //      return parent::beforeSave($insert);
-// }

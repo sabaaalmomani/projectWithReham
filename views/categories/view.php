@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'status',	
-          
-           
+            'idate',
+            'udate',
         ],
     ]) ?>
 
