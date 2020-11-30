@@ -31,7 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'idate',
             'udate',
             'price',
-          
+            [
+               // 'label'=>'product_image',
+                'attribute'=>'product_image',
+                'format' => ['image',['width'=>'70','height'=>'70']],
+                'value'=> function ($model) {
+                    return ( $model->imageurl);
+                
+                }
+                
+            ],
             ['class' => 'yii\grid\ActionColumn'],
 
         ],

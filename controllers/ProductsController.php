@@ -61,14 +61,14 @@ class ProductsController extends \yii\web\Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $image=UploadedFile::getInstance($model,'product_image');
             $imgName= time() .'.' . $image->getExtension();
-            $image->saveAs(yii::getAlias( $imgName));
+            $image->saveAs(yii::getAlias( '@productsimgpath'. '/'. $imgName));
             $model->product_image=$imgName;
             $model->save();
 
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
          else { 
-                    //print_r($model->getErrors ());die;
+                    //print_r($model->getErrors ()product_image);die;
                     return $this->render('create', [
                         'model' => $model,
                     ]);
@@ -79,24 +79,30 @@ class ProductsController extends \yii\web\Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-       $model->scenario = Products::SCENARIO_UPDATE;
+        
 
-         if (!empty(Yii::$app->request->post())) {
+        $model->scenario = Products::SCENARIO_UPDATE;
 
-            $model->load(Yii::$app->request->post());
-            if ($model->validate())
-                echo "validate";
-            if ($model->save(false)) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }else {
-              //  print_r($model->getErrors());die;
-            }
-    }
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {            
+            $image=UploadedFile::getInstance($model,'product_image');
+            $imgName= time()  . '.' . $image->getExtension();
+            $image->saveAs(yii::getAlias( '@productsimgpath'. '/'. $imgName));
+            $model->product_image=$imgName;
+            $model->save();
 
+         
+          return $this->redirect(['view', 'id' => $model->id]);
+        }
+            // else {
+            //   //  print_r($model->getErrors());die;
+            // }
+
+          else
+          {
         return $this->render('update', [
             'model' => $model,
 
-        ]);
+        ]);}
     }
           
 
