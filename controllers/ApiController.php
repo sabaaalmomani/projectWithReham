@@ -56,7 +56,7 @@ class ApiController extends \yii\web\Controller
 
         public function actionGetAllProducts()
         {
-
+            
             $products = Products::find()->asArray()->all();
                 return json_encode($products);
 
@@ -75,7 +75,6 @@ class ApiController extends \yii\web\Controller
         public function actionUpdateProduct($id)
            {
     
-
             $model = Products::findOne($id);
             if($model){
             $model->load(Yii::$app->request->post());
