@@ -65,10 +65,13 @@ class ApiController extends \yii\web\Controller
 
         public function actionGetProduct()
          {   $id=$_GET['id'];
-             if (isset($id))
+             if (isset($id)){
             Yii::$app->response->format = \yii\ web\ Response::FORMAT_JSON;
             $product = \app\ models\ Products::findOne($id);
             return $product;
+        
+        }
+
           }
 
 
