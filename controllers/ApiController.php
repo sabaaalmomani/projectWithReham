@@ -38,7 +38,7 @@ class ApiController extends \yii\web\Controller
             }
         }
 
-                        
+        // @todo Saba change the action name and fix it with pagination it's not working
         public function actionGetDataProvider(){
             $searchModel = new ProductsSearch();
             $provider = $searchModel->searchApi(Yii::$app->request->queryParams);
@@ -49,7 +49,7 @@ class ApiController extends \yii\web\Controller
                 $array['price']=$data['price']; 
                 $array['category_id']=$data['category_id']; 
             }
-            var_dump($data);die;
+            //var_dump($data);die;
             $response['data']=$data;
             return json_encode($response);
 
@@ -63,7 +63,7 @@ class ApiController extends \yii\web\Controller
 
         }
 
-
+        // @todo Saba Remove $id from the action parameter and use params
         public function actionGetProduct($id)
          {
             Yii::$app->response->format = \yii\ web\ Response::FORMAT_JSON;
@@ -100,7 +100,7 @@ class ApiController extends \yii\web\Controller
             $model = Products::findOne($id);
             $model->delete();
                 // var_dump('deleted') ;die;
-            
+            // @todo Saba  what is $this->delete() ? the model is already deleted above
                 if($this->delete()){
                     return json_encode([
                         "status" => true,'data'=>'product deleted successfuly'
@@ -123,6 +123,7 @@ class ApiController extends \yii\web\Controller
             $model->attributes=Yii::$app->request->post();
             if ($model->validate()&& $model->save())
             {
+                // @todo Saba try always to create the response array and finally encode it
                 return json_encode([
                     "success" => true, "data"=>'category created successfuly'
                 ]);
