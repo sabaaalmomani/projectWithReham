@@ -23,8 +23,6 @@ class Products extends \yii\db\ActiveRecord
         return $scenarios;  
     }
 
-  
-
 
     public function rules()
     {
@@ -93,19 +91,19 @@ class Products extends \yii\db\ActiveRecord
 
 
 
-          
-              public function afterSave($insert, $changedAttributes)
-              {  
-                $products_count = Products::find()->where(['category_id'=>$this->category_id])->count();
-                $model = Categories::findOne($this->category_id);
-                $model->products_count =$products_count;
-                $model->save();
-                                ///
-                                // $model = $this->category;
-                                // $model->products_count =$products_count;
-                                // $model->save();
-                // $this->category->products_count = count($products);
-                // $this->category->save();
-            }
+    
+        public function afterSave($insert, $changedAttributes)
+        {  
+        $products= Products::find()->where(['category_id'=>$this->category_id])->count();
+        $model = Categories::findOne($this->category_id);
+        $model->products_count =$products;
+        $model->save();
+        }
+        // $model = $this->category;
+        // $model->products_count =$products_count;
+        // $model->save();
+        // $this->category->products_count = count($products);
+        // $this->category->save();
+            
           
         }

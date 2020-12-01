@@ -3,17 +3,16 @@
 namespace app\controllers;
 use app\models\Products;
 use app\models\Categories;
-use yii\web\NotFoundHttpException;
-use yii\data\PaginatedRepresentation;
-use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
 use app\models\ProductsSearch;
+use yii\filters\auth\HttpBasicAuth;
+
 
 use Yii;
-use yii\data\Pagination;
 
 class ApiController extends \yii\web\Controller
 {
+
+
 
 
 
@@ -37,6 +36,7 @@ class ApiController extends \yii\web\Controller
                 ]);
             }
         }
+       
 
                         
         public function actionGetDataProvider(){
@@ -49,8 +49,7 @@ class ApiController extends \yii\web\Controller
                 $array['price']=$data['price']; 
                 $array['category_id']=$data['category_id']; 
             }
-            var_dump($data);die;
-            $response['data']=$data;
+            $response['data']=$array;
             return json_encode($response);
 
          }
@@ -65,7 +64,7 @@ class ApiController extends \yii\web\Controller
 
 
         public function actionGetProduct($id)
-         {
+         { 
             Yii::$app->response->format = \yii\ web\ Response::FORMAT_JSON;
             $product = \app\ models\ Products::findOne($id);
             return $product;
@@ -76,6 +75,7 @@ class ApiController extends \yii\web\Controller
         public function actionUpdateProduct($id)
            {
     
+
             $model = Products::findOne($id);
             if($model){
             $model->load(Yii::$app->request->post());
